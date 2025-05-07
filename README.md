@@ -1,18 +1,19 @@
-# Simple Web Page with GitLab CI/CD
+# Statická stránka s CI/CD v GitLabu
 
-This project demonstrates a simple static web page with two buttons displaying product prices.  
-The page is containerized with Docker and deployed using GitLab CI/CD pipelines.
+Tento projekt demonstruje nasazení jednoduché HTML stránky pomocí Docker a GitLab CI/CD.
 
-## Project Structure
+## Co projekt obsahuje
 
-- `index.html` - basic webpage with buttons
-- `script.js` - logic for displaying product prices
-- `Dockerfile` - instructions for building Docker image using nginx
-- `.gitlab-ci.yml` - GitLab CI/CD pipeline configuration
-- `README.md` - project description
+- `index.html` – statická webová stránka
+- `Dockerfile` – instrukce k sestavení kontejneru s nginx
+- `.gitlab-ci.yml` – automatizované sestavení a nasazení
 
-## How to run locally
+## CI/CD proces
 
+1. **Build** – sestaví Docker image s webovou stránkou.
+2. **Deploy** – spustí image jako kontejner na portu `3100`.
+
+## Spuštění lokálně (volitelné)
 ```bash
 docker build -t my-simple-page .
 docker run -d -p 3100:80 my-simple-page

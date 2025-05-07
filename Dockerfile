@@ -1,13 +1,15 @@
-# We will use the official Nginx image
+# Použijeme oficiální nginx obraz jako základ pro náš kontejner
 FROM nginx:alpine
 
-# We will delete the default nginx content
-RUN rm -rf /usr/share/nginx/html/*
+# Nastavíme pracovní adresář uvnitř kontejneru (nepovinné, ale dobrý zvyk)
+WORKDIR /usr/share/nginx/html
 
-# We will copy our website
+# Smažeme původní soubor index.html dodaný s nginxem
+RUN rm -f /usr/share/nginx/html/index.html
+
+# Zkopírujeme náš vlastní soubor index.html do webového rootu nginxu
 COPY index.html /usr/share/nginx/html/
-COPY script.js /usr/share/nginx/html/
 
-# Nginx runs on port 80 inside the container, but we will later map port 3100 outside
+# Nginx standardně naslouchá na portu 80, nemusíme nastavovat
 
-EXPOSE 80
+# Hotovo – když se kontejner spustí, nginx automaticky obsluhuje index.html
