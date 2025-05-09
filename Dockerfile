@@ -1,15 +1,17 @@
-# Použijeme oficiální nginx obraz jako základ pro náš kontejner
+# Použijeme oficiální nginx image založený na Alpine Linuxu
 FROM nginx:alpine
 
-# Nastavíme pracovní adresář uvnitř kontejneru (nepovinné, ale dobrý zvyk)
+# Nastavíme pracovní adresář na místo, odkud Nginx servíruje soubory
 WORKDIR /usr/share/nginx/html
 
-# Smažeme původní soubor index.html dodaný s nginxem
-RUN rm -f /usr/share/nginx/html/index.html
+# Odstraníme výchozí index.html soubor, který je součástí Nginx image
+RUN rm -f index.html
 
-# Zkopírujeme náš vlastní soubor index.html do webového rootu nginxu
-COPY index.html /usr/share/nginx/html/
+# Zkopírujeme náš vlastní HTML soubor do root adresáře Nginx serveru
+COPY index.html .
 
-# Nginx standardně naslouchá na portu 80, nemusíme nastavovat
+# Zkopírujeme JavaScript pro obsluhu tlačítek
+COPY script.js .
 
-# Hotovo – když se kontejner spustí, nginx automaticky obsluhuje index.html
+# Port 80 není třeba nastavovat – Nginx ho používá jako výchozí
+# Kontejner bude při spuštění automaticky obsluhovat web
